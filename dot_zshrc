@@ -1,7 +1,7 @@
 # ~/.zshrc - Optimized
 
 # Fast PATH setup (no brew calls!)
-export PATH="/usr/local/bin:/usr/local/sbin:$HOME/.local/bin:$PATH"
+export PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$HOME/.local/bin:$PATH"
 
 export EDITOR=nano
 
@@ -9,8 +9,8 @@ export EDITOR=nano
 eval "$(starship init zsh)"
 
 # Plugins - HARDCODE paths instead of $(brew --prefix)
-source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # FZF integration
 eval "$(fzf --zsh)"
@@ -28,7 +28,7 @@ setopt SHARE_HISTORY
 setopt HIST_IGNORE_DUPS
 
 # Add completions directory
-fpath+=(/usr/local/share/zsh/site-functions)
+fpath+=($HOMEBREW_PREFIX/share/zsh/site-functions)
 
 # Fast completion initialization
 autoload -Uz compinit && compinit -C
