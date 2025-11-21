@@ -1,7 +1,9 @@
 # ~/.zshrc - Optimized
 
 # Fast PATH setup (no brew calls!)
-export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
+export PATH="/usr/local/bin:/usr/local/sbin:$HOME/.local/bin:$PATH"
+
+export EDITOR=nano
 
 # Starship prompt
 eval "$(starship init zsh)"
