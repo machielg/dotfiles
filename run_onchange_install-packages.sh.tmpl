@@ -1,4 +1,5 @@
 #!/bin/bash
+# Brewfile hash: {{ include "Brewfile" | sha256sum }}
 
 {{ if eq .chezmoi.os "darwin" -}}
 # Install Homebrew if not installed
