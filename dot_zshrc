@@ -1,36 +1,37 @@
 # ~/.zshrc - Optimized
 
-# Fast PATH setup (no brew calls!)
-export PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$HOME/.local/bin:$PATH"
+if [[ -x /opt/homebrew/bin/brew ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [[ -x /usr/local/bin/brew ]]; then
+  eval "$(/usr/local/bin/brew shellenv)"
+fi
 
+export PATH="$HOME/.local/bin:$PATH"
 export EDITOR=nano
+
+# Completions (must be before compinit)
+fpath+=($HOMEBREW_PREFIX/share/zsh/site-functions)
+autoload -Uz compinit && compinit -C
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
 # Starship prompt
 eval "$(starship init zsh)"
 
-# Plugins - HARDCODE paths instead of $(brew --prefix)
+# Plugins
 source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # FZF integration
 eval "$(fzf --zsh)"
 
-# Modern aliases
+# Aliases
 alias ls='eza --icons'
 alias ll='eza -la --icons'
 alias tree='eza --tree --icons'
 alias cat='bat'
+alias htcvpn='tmux new -d -s vpnsession sudo openfortivpn vpn.humantotalcare.nl:443 -u m.keizer-groeneveld --trusted-cert 93faecf02860851228ce4a4be2ac61462a062a1f4b7d06db364e9f261a97774e --set-dns=1 --pppd-use-peerdns=1'
 
-# History settings
+# History
 HISTSIZE=10000
 SAVEHIST=10000
-setopt SHARE_HISTORY
-setopt HIST_IGNORE_DUPS
-
-# Add completions directory
-fpath+=($HOMEBREW_PREFIX/share/zsh/site-functions)
-
-# Fast completion initialization
-autoload -Uz compinit && compinit -C
-
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+setopt SHARE_HISTORY HIST_IGNORE_DUPS
