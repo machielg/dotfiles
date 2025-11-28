@@ -11,4 +11,5 @@ fi
 # Install from Brewfile
 echo "Installing Homebrew packages..."
 brew bundle --file={{ .chezmoi.homeDir }}/Brewfile
+brew bundle cleanup --file={{ .chezmoi.homeDir }}/Brewfile
 {{ end -}}

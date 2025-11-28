@@ -50,6 +50,7 @@ cask "logi-options+"
 cask "session-manager-plugin"
 cask "slack"
 cask "gg"
+cask "onedrive"
 cask "visual-studio-code"
 vscode "databricks.databricks"
 vscode "docker.docker"
@@ -107,4 +108,7 @@ brew "tilt"
 brew "helm@3", link: :overwrite
 brew "helmfile", args: ["ignore-dependencies"]
 brew "argocd"
+tap "azure/kubelogin"
+brew "azure/kubelogin/kubelogin"
+cask "freelens"
 {{ end }}

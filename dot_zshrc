@@ -24,12 +24,18 @@ source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 # FZF integration
 eval "$(fzf --zsh)"
 
+get-forti-cert() {
+  echo | openssl s_client -connect "$1" 2>/dev/null \
+    | openssl x509 -fingerprint -sha256 -noout \
+    | sed 's/.*=//; s/://g' | tr 'A-F' 'a-f'
+}
+
 # Aliases
 alias ls='eza --icons'
 alias ll='eza -la --icons'
 alias tree='eza --tree --icons'
 alias cat='bat'
-alias htcvpn='tmux new -d -s vpnsession sudo openfortivpn vpn.humantotalcare.nl:443 -u m.keizer-groeneveld --trusted-cert 93faecf02860851228ce4a4be2ac61462a062a1f4b7d06db364e9f261a97774e --set-dns=1 --pppd-use-peerdns=1'
+alias htc-vpn='sudo openfortivpn -q --trusted-cert "$(get-forti-cert vpn.humantotalcare.nl:443)"'
 
 # History
 HISTSIZE=10000
