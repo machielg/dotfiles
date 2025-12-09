@@ -23,7 +23,7 @@
 
 # Disable specific steps - same options as the command line flag
 # disable = ["system", "emacs"]
-disable = ["uv"]
+disable = ["uv", "pip3"]
 
 # Ignore failures for these steps
 # ignore_failures = ["powershell"]
