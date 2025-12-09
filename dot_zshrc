@@ -8,6 +8,7 @@ fi
 
 export PATH="$HOME/.local/bin:$PATH"
 export EDITOR=nano
+export SPARK_LOCAL_IP=127.0.0.1
 
 # Completions (must be before compinit)
 fpath+=($HOMEBREW_PREFIX/share/zsh/site-functions)
