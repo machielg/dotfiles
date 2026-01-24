@@ -24,6 +24,7 @@ source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 
 # FZF integration
 eval "$(fzf --zsh)"
+bindkey '^I' expand-or-complete  # Restore standard tab completion
 
 get-forti-cert() {
   echo | openssl s_client -connect "$1" 2>/dev/null \
