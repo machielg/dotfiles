@@ -9,6 +9,7 @@ brew "go-task"
 brew "checkov"
 {{ end }}
 
+brew "mcp-proxy"
 brew "pre-commit"
 # brew "pixi"
 brew "go"
@@ -60,6 +61,8 @@ cask "slack"
 cask "gg"
 cask "onedrive"
 cask "visual-studio-code"
+cask "orbstack"
+vscode "databricks.databricks"
 vscode "docker.docker"
 vscode "github.copilot"
 vscode "github.copilot-chat"
@@ -95,10 +98,13 @@ vscode "visualjj.visualjj"
 vscode "ziglang.vscode-zig"
 {{ if .claude }}
 vscode "anthropic.claude-code"
-cask "claude-code"
+cask "claude-code@latest"
+cask "claude"
 {{ end }}
 brew "openfortivpn"
 brew "yq"
+brew "gh"
+cask "codex"
 cask "git-credential-manager"
 brew "tmux"
 {{ if eq .machine_type "personal" }}
@@ -114,7 +120,6 @@ cask "adobe-acrobat-reader"
 {{ if .needs_k8s }}
 brew "k9s"
 brew "kubernetes-cli"
-cask "orbstack"
 brew "tilt"
 brew "helm@3", link: :overwrite
 brew "helmfile", args: ["ignore-dependencies"]
