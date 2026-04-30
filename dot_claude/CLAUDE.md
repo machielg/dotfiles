@@ -11,3 +11,16 @@
 
 - For any task larger than a single edit, first produce a short plan broken into steps. Each step should end in a commit.
 - Implement and commit each step before moving to the next. Don't accumulate multiple steps worth of changes before committing.
+
+## Python development
+
+### Exceptions
+- Do not shadow built in exceptions
+- Never swallow exceptions
+- No defensive programming
+- Fail fast
+- Avoid using Exceptions for flow logic
+
+### Python Code Style
+- Use Clean Code principles
+- Use Classes unless the function is truly standaline
