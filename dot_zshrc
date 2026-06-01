@@ -44,3 +44,4 @@ alias czpush='chezmoi re-add && chezmoi git add . && chezmoi git commit && chezm
 HISTSIZE=10000
 SAVEHIST=10000
 setopt SHARE_HISTORY HIST_IGNORE_DUPS
+export PATH="/opt/homebrew/opt/rustup/bin:$PATH"
