@@ -1,8 +1,12 @@
-tap "azure/azd"
-tap "databricks/tap"
-tap "hashicorp/tap"
+brew "mosh"
+cask "stats"
+brew "xcodegen"
+
+#tap "azure/azd"
+#tap "databricks/tap"
 
 {{ if .needs_terraform }}
+tap "hashicorp/tap"
 brew "tflint"
 brew "hashicorp/tap/terraform"
 brew "go-task"
@@ -30,13 +34,23 @@ brew "eza"
 brew "fzf"
 brew "git"
 brew "git-lfs"
+<<<<<<< Updated upstream
 cask "git-credential-manager" 
 brew "gmp"
 brew "hashcat"
 brew "jj"
+=======
+#brew "gmp"
+#brew "hashcat"
+#brew "jj"
+>>>>>>> Stashed changes
 brew "jq"
-brew "juju"
+#brew "juju"
 brew "just"
+<<<<<<< Updated upstream
+=======
+#brew "libomp"
+>>>>>>> Stashed changes
 brew "starship"
 brew "telnet"
 brew "topgrade"
@@ -48,9 +62,12 @@ brew "zsh-autosuggestions"
 brew "zsh-syntax-highlighting"
 brew "azure/azd/azd"
 brew "databricks/tap/databricks"
+<<<<<<< Updated upstream
 cask "zulu@21"
+=======
+>>>>>>> Stashed changes
 cask "appcleaner"
-cask "coteditor"
+#cask "coteditor"
 cask "cyberduck"
 cask "dbeaver-community"
 cask "firefox"
@@ -59,14 +76,12 @@ cask "jetbrains-toolbox"
 cask "keka"
 cask "logi-options+"
 cask "slack"
-cask "gg"
-cask "onedrive"
+#cask "gg"
+#cask "onedrive"
 cask "visual-studio-code"
 cask "orbstack"
 vscode "databricks.databricks"
 vscode "docker.docker"
-vscode "github.copilot"
-vscode "github.copilot-chat"
 vscode "github.vscode-github-actions"
 vscode "kevinrose.vsc-python-indent"
 vscode "lkrms.inifmt"
@@ -94,14 +109,20 @@ vscode "skellock.just"
 vscode "svelte.svelte-vscode"
 vscode "tamasfe.even-better-toml"
 {{ if eq .machine_type "personal" }}
-vscode "visualjj.visualjj"
+
+{{ else }}
+cask "git-credential-manager"
+brew "openfortivpn"
 {{ end }}
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 {{ if .claude }}
 vscode "anthropic.claude-code"
 cask "claude-code@latest"
-cask "claude"
 {{ end }}
-brew "openfortivpn"
+
 brew "yq"
 brew "gh"
 cask "codex"
@@ -111,10 +132,8 @@ cask "superduper"
 cask "vlc"
 cask "surfshark"
 cask "google-chrome"
-cask "soundsource"
-cask "thunderbird"
-cask "gimp"
-cask "adobe-acrobat-reader"
+#cask "gimp"
+#cask "adobe-acrobat-reader"
 {{ end }}
 {{ if .needs_k8s }}
 brew "k9s"
@@ -128,3 +147,5 @@ brew "azure/kubelogin/kubelogin"
 cask "freelens"
 vscode "ms-kubernetes-tools.vscode-kubernetes-tools"
 {{ end }}
+
+cask "zed"
