@@ -1,7 +1,12 @@
+brew "prek"
+brew "rustup"
+cask "microsoft-teams"
+
 brew "mosh"
 cask "stats"
 brew "xcodegen"
 
+brew "anomalyco/tap/opencode", trusted: true
 #tap "azure/azd"
 #tap "databricks/tap"
 
@@ -65,36 +70,7 @@ cask "logi-options+"
 cask "slack"
 #cask "gg"
 #cask "onedrive"
-cask "visual-studio-code"
 cask "orbstack"
-vscode "databricks.databricks"
-vscode "docker.docker"
-vscode "github.vscode-github-actions"
-vscode "kevinrose.vsc-python-indent"
-vscode "lkrms.inifmt"
-vscode "mechatroner.rainbow-csv"
-vscode "ms-azuretools.azure-dev"
-vscode "ms-azuretools.vscode-bicep"
-vscode "ms-azuretools.vscode-containers"
-vscode "ms-azuretools.vscode-docker"
-vscode "ms-dotnettools.vscode-dotnet-runtime"
-vscode "ms-python.debugpy"
-vscode "ms-python.python"
-vscode "ms-python.vscode-pylance"
-vscode "ms-python.vscode-python-envs"
-vscode "ms-toolsai.jupyter"
-vscode "ms-toolsai.jupyter-keymap"
-vscode "ms-toolsai.jupyter-renderers"
-vscode "ms-toolsai.vscode-ai"
-vscode "ms-toolsai.vscode-ai-remote"
-vscode "ms-toolsai.vscode-jupyter-cell-tags"
-vscode "ms-toolsai.vscode-jupyter-slideshow"
-vscode "ms-vscode-remote.remote-containers"
-vscode "prompt-flow.prompt-flow"
-vscode "redhat.vscode-yaml"
-vscode "skellock.just"
-vscode "svelte.svelte-vscode"
-vscode "tamasfe.even-better-toml"
 {{ if eq .machine_type "personal" }}
 
 {{ else }}
@@ -102,7 +78,6 @@ cask "git-credential-manager"
 brew "openfortivpn"
 {{ end }}
 {{ if .claude }}
-vscode "anthropic.claude-code"
 cask "claude-code@latest"
 {{ end }}
 
@@ -128,7 +103,6 @@ brew "argocd"
 tap "azure/kubelogin"
 brew "azure/kubelogin/kubelogin"
 cask "freelens"
-vscode "ms-kubernetes-tools.vscode-kubernetes-tools"
 {{ end }}
 
 cask "zed"
