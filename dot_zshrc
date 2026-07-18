@@ -33,9 +33,10 @@ get-forti-cert() {
 }
 
 # Aliases
-alias ls='eza --icons'
-alias ll='eza -la --icons'
-alias tree='eza --tree --icons'
+export EZA_ICONS_AUTO=1
+alias ls='ezas'
+alias ll='eza -la'
+alias tree='eza --tree'
 alias cat='bat'
 alias htc-vpn='sudo openfortivpn -q --trusted-cert "$(get-forti-cert vpn.humantotalcare.nl:443)" --set-dns=1 --pppd-use-peerdns=1'
 alias czpush='chezmoi re-add && chezmoi git add . && chezmoi git commit && chezmoi git push && exit'
