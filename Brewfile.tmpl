@@ -5,13 +5,14 @@ cask "microsoft-teams"
 brew "mosh"
 cask "stats"
 brew "xcodegen"
+cask "zed"
 
 brew "anomalyco/tap/opencode", trusted: true
 #tap "azure/azd"
 #tap "databricks/tap"
 
 {{ if .needs_terraform }}
-tap "hashicorp/tap"
+tap "hashicorp/tap", trusted: true
 brew "tflint"
 brew "hashicorp/tap/terraform"
 brew "go-task"
@@ -22,7 +23,7 @@ brew "mcp-proxy"
 brew "pre-commit"
 # brew "pixi"
 brew "go"
-brew "aisk/tap/timeout"
+brew "aisk/tap/timeout", trusted: true
 brew "cloc"
 brew "chezmoi"
 brew "act"
@@ -55,8 +56,8 @@ brew "watch"
 brew "wget"
 brew "zsh-autosuggestions"
 brew "zsh-syntax-highlighting"
-brew "azure/azd/azd"
-brew "databricks/tap/databricks"
+brew "azure/azd/azd", trusted: true
+brew "databricks/tap/databricks", trusted: true
 cask "zulu@21"
 cask "appcleaner"
 #cask "coteditor"
@@ -99,8 +100,7 @@ brew "kubernetes-cli"
 brew "tilt"
 brew "helm@3", link: :overwrite
 brew "helmfile", args: ["ignore-dependencies"]
-brew "argocd"
-tap "azure/kubelogin"
+tap "azure/kubelogin", trusted: true
 brew "azure/kubelogin/kubelogin"
 cask "freelens"
 {{ end }}
