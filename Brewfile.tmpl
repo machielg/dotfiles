@@ -1,71 +1,35 @@
-cask "taskpaper"
-brew "apm"
-brew "bun"
+# CLI tooling lives in ~/.config/mise/config.toml (cross-platform).
+# This file is macOS-only: casks, system libraries, and shell integration.
 
-brew "prek"
-brew "rustup"
-cask "microsoft-teams"
-
-brew "mosh"
-cask "stats"
-brew "xcodegen"
-cask "zed"
-
-brew "anomalyco/tap/opencode", trusted: true
-brew "nat-n/poethepoet/poethepoet", trusted: true
-#tap "azure/azd"
-#tap "databricks/tap"
-
-{{ if .needs_terraform }}
-tap "hashicorp/tap", trusted: true
-brew "tflint"
-brew "hashicorp/tap/terraform"
-brew "go-task"
-brew "checkov"
-{{ end }}
-
-brew "mcp-proxy"
-brew "pre-commit"
-# brew "pixi"
-brew "go"
-brew "aisk/tap/timeout", trusted: true
-brew "cloc"
+# Bootstrap
 brew "chezmoi"
 brew "mise"
-brew "copier"
-brew "act"
-brew "openssl@3"
-{{ if .aws }}
-brew "awscli"
-{{ end }}
-brew "libyaml"
-brew "azure-cli"
-brew "bash"
-brew "bat"
-brew "ripgrep"
-brew "eza"
-brew "fzf"
-brew "git"
-brew "git-lfs"
-cask "git-credential-manager"
-brew "gmp"
-brew "hashcat"
-brew "jj"
-brew "jq"
-#brew "juju"
-brew "just"
-brew "starship"
-brew "telnet"
 brew "topgrade"
+
+# System libraries
+brew "gmp"
+brew "libyaml"
+brew "openssl@3"
+
+# Base system tools
+brew "bash"
+brew "git"
+brew "hashcat"
+brew "mosh"
+brew "telnet"
 brew "tree"
-brew "uv"
 brew "watch"
 brew "wget"
+
+# Shell integration
 brew "zsh-autosuggestions"
 brew "zsh-syntax-highlighting"
-brew "azure/azd/azd", trusted: true
-brew "databricks/tap/databricks", trusted: true
-cask "zulu@21"
+
+#brew "juju"
+#brew "pixi"   # also available via mise
+brew "mcp-proxy"
+brew "aisk/tap/timeout", trusted: true
+
 cask "appcleaner"
 #cask "coteditor"
 cask "cyberduck"
@@ -75,41 +39,28 @@ cask "font-jetbrains-mono-nerd-font"
 cask "jetbrains-toolbox"
 cask "keka"
 cask "logi-options+"
-cask "slack"
+cask "microsoft-teams"
 #cask "gg"
-#cask "onedrive"
 cask "orbstack"
+#cask "onedrive"
+cask "slack"
+cask "stats"
+cask "taskpaper"
+cask "zed"
+
 {{ if eq .machine_type "personal" }}
+cask "google-chrome"
+cask "superduper"
+cask "surfshark"
 cask "tor-browser"
+cask "vlc"
+#cask "gimp"
+#cask "adobe-acrobat-reader"
 {{ else }}
 cask "git-credential-manager"
 brew "openfortivpn"
 {{ end }}
-{{ if .claude }}
-cask "claude-code@latest"
-{{ end }}
 
-brew "yq"
-brew "gh"
-cask "codex"
-brew "tmux"
-{{ if eq .machine_type "personal" }}
-cask "superduper"
-cask "vlc"
-cask "surfshark"
-cask "google-chrome"
-#cask "gimp"
-#cask "adobe-acrobat-reader"
-{{ end }}
 {{ if .needs_k8s }}
-brew "k9s"
-brew "kubernetes-cli"
-brew "tilt"
-brew "helm@3", link: :overwrite
-brew "helmfile", args: ["ignore-dependencies"]
-tap "azure/kubelogin", trusted: true
-brew "azure/kubelogin/kubelogin"
 cask "freelens"
 {{ end }}
-
-cask "zed"
