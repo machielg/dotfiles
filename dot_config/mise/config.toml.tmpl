@@ -1,0 +1,61 @@
+[tools]
+# Shell / core CLI
+bat = "latest"
+eza = "latest"
+fzf = "latest"
+ripgrep = "latest"
+starship = "latest"
+tmux = "latest"
+jq = "latest"
+yq = "latest"
+cloc = "latest"
+
+# Dev tooling
+bun = "latest"
+go = "latest"
+rust = "latest"
+uv = "latest"
+java = "zulu-21"
+just = "latest"
+task = "latest"
+act = "latest"
+prek = "latest"
+github-cli = "latest"
+git-lfs = "latest"
+jj = "latest"
+copier = "latest"
+xcodegen = "latest"
+"pipx:poethepoet" = "latest"
+
+# Cloud / data (unconditional, as in the Brewfile)
+azure = "latest"
+azd = "latest"
+databricks-cli = "latest"
+
+# Agents
+claude = "latest"
+codex = "latest"
+opencode = "latest"
+apm = "latest"
+
+{{ if .needs_terraform -}}
+# Terraform
+terraform = "latest"
+tflint = "latest"
+checkov = "latest"
+{{ end -}}
+
+{{ if .needs_k8s -}}
+# Kubernetes
+kubectl = "latest"
+helm = "latest"
+helmfile = "latest"
+k9s = "latest"
+kubelogin = "latest"
+tilt = "latest"
+{{ end -}}
+
+{{ if .aws -}}
+aws-cli = "latest"
+{{ end -}}
+
