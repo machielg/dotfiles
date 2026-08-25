@@ -20,6 +20,8 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
 # mise - must come before anything that runs a mise-managed binary
 eval "$(mise activate zsh)"
+# mise ships no completion file; the generated script self-registers via compdef
+eval "$(mise completion zsh)"
 
 # Starship prompt
 eval "$(starship init zsh)"
