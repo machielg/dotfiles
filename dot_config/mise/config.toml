@@ -54,14 +54,6 @@ adopt = true    # these apps are already installed by Homebrew - adopt, don't re
 
 [bootstrap.packages]
 
-# System libraries
-"brew:gmp" = { os = "macos" }
-"pacman:gmp" = { os = "linux" }
-"brew:libyaml" = { os = "macos" }
-"pacman:libyaml" = { os = "linux" }
-"brew:openssl@3" = { os = "macos" }
-"pacman:openssl" = { os = "linux" }
-
 # Base system tools
 "brew:bash" = { os = "macos" }
 "pacman:bash" = { os = "linux" }
