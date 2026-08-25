@@ -1,5 +1,8 @@
 # Work machines only - see .chezmoiignore.
 
+[tools]
+copier = "latest"
+
 [bootstrap.packages]
 "brew:openfortivpn" = { os = "macos" }
 "pacman:openfortivpn" = { os = "linux" }

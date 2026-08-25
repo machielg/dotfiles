@@ -27,7 +27,6 @@ github-cli = "latest"
 gitleaks = "latest"
 git-lfs = "latest"
 jj = "latest"
-copier = "latest"
 xcodegen = "latest"
 "pipx:poethepoet" = "latest"
 
