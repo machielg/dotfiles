@@ -38,13 +38,6 @@ codex = "latest"
 opencode = "latest"
 apm = "latest"
 
-{{ if .needs_terraform -}}
-# Terraform
-terraform = "latest"
-tflint = "latest"
-checkov = "latest"
-{{ end -}}
-
 {{ if .needs_k8s -}}
 # Kubernetes
 kubectl = "latest"
@@ -53,10 +46,6 @@ helmfile = "latest"
 k9s = "latest"
 kubelogin = "latest"
 tilt = "latest"
-{{ end -}}
-
-{{ if .aws -}}
-aws-cli = "latest"
 {{ end -}}
 
 
