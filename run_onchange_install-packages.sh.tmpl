@@ -1,15 +1,15 @@
 #!/bin/bash
-# Brewfile hash: {{ include "Brewfile.tmpl" | sha256sum }}
+# mise config hash: {{ include "dot_config/mise/config.toml.tmpl" | sha256sum }}
+set -euo pipefail
 
-{{ if eq .chezmoi.os "darwin" -}}
-# Install Homebrew if not installed
-if ! command -v brew &> /dev/null; then
-    echo "Installing Homebrew..."
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+if ! command -v mise &> /dev/null; then
+    echo "Installing mise..."
+    curl -fsSL https://mise.run | sh
 fi
+export PATH="$HOME/.local/bin:$PATH"
 
-# Install from Brewfile
-echo "Installing Homebrew packages..."
-brew bundle --file={{ .chezmoi.homeDir }}/Brewfile
-brew bundle cleanup --file={{ .chezmoi.homeDir }}/Brewfile || true
-{{ end -}}
+echo "Installing host packages..."
+mise bootstrap packages apply --yes
+
+echo "Installing tools..."
+mise install --yes
