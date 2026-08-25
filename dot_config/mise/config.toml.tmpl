@@ -115,6 +115,7 @@ adopt = true    # these apps are already installed by Homebrew - adopt, don't re
 "brew-cask:stats" = { os = "macos" }
 "brew-cask:taskpaper" = { os = "macos" }
 "brew-cask:zed" = { os = "macos" }
+"brew-cask:git-credential-manager" = { os = "macos" }
 {{ if eq .machine_type "personal" -}}
 "brew-cask:google-chrome" = { os = "macos" }
 "brew-cask:superduper" = { os = "macos" }
@@ -122,7 +123,6 @@ adopt = true    # these apps are already installed by Homebrew - adopt, don't re
 "brew-cask:tor-browser" = { os = "macos" }
 "brew-cask:vlc" = { os = "macos" }
 {{ else -}}
-"brew-cask:git-credential-manager" = { os = "macos" }
 "brew:openfortivpn" = { os = "macos" }
 "pacman:openfortivpn" = { os = "linux" }
 {{ end -}}

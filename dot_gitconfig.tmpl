@@ -10,6 +10,6 @@
 	defaultBranch = main
 [credential]
 	helper = 
-	helper = /usr/local/share/gcm-core/git-credential-manager
+	helper = {{ if eq .chezmoi.os "darwin" }}manager{{ else }}libsecret{{ end }}
 [credential "https://dev.azure.com"]
 	useHttpPath = true
