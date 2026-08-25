@@ -1,0 +1,12 @@
+# Machines that answered yes to needs_k8s - see .chezmoiignore.
+
+[tools]
+kubectl = "latest"
+helm = "latest"
+helmfile = "latest"
+k9s = "latest"
+kubelogin = "latest"
+tilt = "latest"
+
+[bootstrap.packages]
+"brew-cask:freelens" = { os = "macos" }

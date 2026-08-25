@@ -1,3 +1,9 @@
+# Global tools and host packages, on every machine. Plain (not a template) so
+# `mise use -g <tool>` and `mise bootstrap packages use <pkg>` can write here
+# and `chezmoi re-add` can pick the change back up - chezmoi refuses to
+# overwrite templates. Machine-conditional entries live in conf.d/, which mise
+# merges into this file; .chezmoiignore decides which of those land.
+
 [tools]
 # Shell / core CLI
 bat = "latest"
@@ -38,17 +44,6 @@ claude = "latest"
 codex = "latest"
 opencode = "latest"
 apm = "latest"
-
-{{ if .needs_k8s -}}
-# Kubernetes
-kubectl = "latest"
-helm = "latest"
-helmfile = "latest"
-k9s = "latest"
-kubelogin = "latest"
-tilt = "latest"
-{{ end -}}
-
 
 topgrade = "latest"
 "pipx:mcp-proxy" = "latest"
@@ -117,18 +112,3 @@ adopt = true    # these apps are already installed by Homebrew - adopt, don't re
 "brew-cask:taskpaper" = { os = "macos" }
 "brew-cask:zed" = { os = "macos" }
 "brew-cask:git-credential-manager" = { os = "macos" }
-{{ if eq .machine_type "personal" -}}
-"brew-cask:copilot-cli" = { os = "macos" }
-"brew-cask:google-chrome" = { os = "macos" }
-"brew-cask:grok-build" = { os = "macos" }
-"brew-cask:superduper" = { os = "macos" }
-"brew-cask:surfshark" = { os = "macos" }
-"brew-cask:tor-browser" = { os = "macos" }
-"brew-cask:vlc" = { os = "macos" }
-{{ else -}}
-"brew:openfortivpn" = { os = "macos" }
-"pacman:openfortivpn" = { os = "linux" }
-{{ end -}}
-{{ if .needs_k8s -}}
-"brew-cask:freelens" = { os = "macos" }
-{{ end -}}
