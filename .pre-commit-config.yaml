@@ -1,0 +1,15 @@
+# Runs on `chezmoi git commit`. `chezmoi re-add` sweeps files from $HOME into
+# this repo unattended, so the scan happens before the commit rather than in CI.
+#
+# Declared as a local hook rather than using gitleaks' own `gitleaks-system` id:
+# that definition omits `pass_filenames: false`, so the staged filenames get
+# appended to the command, gitleaks reads the first as a repo path, scans
+# nothing and exits 0 - passing every commit silently.
+repos:
+  - repo: local
+    hooks:
+      - id: gitleaks
+        name: Detect hardcoded secrets
+        entry: gitleaks git --pre-commit --redact --staged --verbose
+        language: system
+        pass_filenames: false

@@ -1,0 +1,8 @@
+#!/bin/bash
+# pre-commit config hash: {{ include ".pre-commit-config.yaml" | sha256sum }}
+set -euo pipefail
+
+# .git/hooks is not version-controlled, so a fresh clone has the config but no
+# active hook until this runs.
+cd {{ .chezmoi.sourceDir | quote }}
+prek install
