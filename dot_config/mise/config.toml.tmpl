@@ -59,3 +59,83 @@ tilt = "latest"
 aws-cli = "latest"
 {{ end -}}
 
+
+topgrade = "latest"
+"pipx:mcp-proxy" = "latest"
+
+# Host packages: system libraries, base tools and GUI apps. Not shimmed, not
+# version-pinned per-project. Entries whose manager is unavailable on the
+# current host are ignored, so one list serves both macOS and Arch.
+# Apply with: mise bootstrap packages apply
+
+[bootstrap.brew]
+adopt = true    # these apps are already installed by Homebrew - adopt, don't replace
+
+[bootstrap.packages]
+
+# System libraries
+"brew:gmp" = { os = "macos" }
+"pacman:gmp" = { os = "linux" }
+"brew:libyaml" = { os = "macos" }
+"pacman:libyaml" = { os = "linux" }
+"brew:openssl@3" = { os = "macos" }
+"pacman:openssl" = { os = "linux" }
+
+# Base system tools
+"brew:bash" = { os = "macos" }
+"pacman:bash" = { os = "linux" }
+"brew:git" = { os = "macos" }
+"pacman:git" = { os = "linux" }
+"brew:hashcat" = { os = "macos" }
+"pacman:hashcat" = { os = "linux" }
+"brew:mosh" = { os = "macos" }
+"pacman:mosh" = { os = "linux" }
+"brew:tree" = { os = "macos" }
+"pacman:tree" = { os = "linux" }
+"brew:wget" = { os = "macos" }
+"pacman:wget" = { os = "linux" }
+"brew:telnet" = { os = "macos" }
+"pacman:inetutils" = { os = "linux" }    # Arch ships telnet here
+"brew:watch" = { os = "macos" }
+"pacman:procps-ng" = { os = "linux" }    # Arch ships watch here
+
+# Shell integration
+"brew:zsh-autosuggestions" = { os = "macos" }
+"pacman:zsh-autosuggestions" = { os = "linux" }
+"brew:zsh-syntax-highlighting" = { os = "macos" }
+"pacman:zsh-syntax-highlighting" = { os = "linux" }
+
+# chezmoi manages this config, so it cannot install itself on a bare machine -
+# bootstrap with get.chezmoi.io. Declared here so it stays updated afterwards.
+"brew:chezmoi" = { os = "macos" }
+"pacman:chezmoi" = { os = "linux" }
+
+# GUI applications (macOS only for now; Linux desktop is a separate decision)
+"brew-cask:appcleaner" = { os = "macos" }
+"brew-cask:cyberduck" = { os = "macos" }
+"brew-cask:dbeaver-community" = { os = "macos" }
+"brew-cask:firefox" = { os = "macos" }
+"brew-cask:font-jetbrains-mono-nerd-font" = { os = "macos" }
+"brew-cask:jetbrains-toolbox" = { os = "macos" }
+"brew-cask:keka" = { os = "macos" }
+"brew-cask:logi-options+" = { os = "macos" }
+"brew-cask:microsoft-teams" = { os = "macos" }
+"brew-cask:orbstack" = { os = "macos" }
+"brew-cask:slack" = { os = "macos" }
+"brew-cask:stats" = { os = "macos" }
+"brew-cask:taskpaper" = { os = "macos" }
+"brew-cask:zed" = { os = "macos" }
+{{ if eq .machine_type "personal" -}}
+"brew-cask:google-chrome" = { os = "macos" }
+"brew-cask:superduper" = { os = "macos" }
+"brew-cask:surfshark" = { os = "macos" }
+"brew-cask:tor-browser" = { os = "macos" }
+"brew-cask:vlc" = { os = "macos" }
+{{ else -}}
+"brew-cask:git-credential-manager" = { os = "macos" }
+"brew:openfortivpn" = { os = "macos" }
+"pacman:openfortivpn" = { os = "linux" }
+{{ end -}}
+{{ if .needs_k8s -}}
+"brew-cask:freelens" = { os = "macos" }
+{{ end -}}
