@@ -45,6 +45,36 @@ get-forti-cert() {
     | sed 's/.*=//; s/://g' | tr 'A-F' 'a-f'
 }
 
+# `mise bootstrap packages use` adds a host package, but mise has no removal
+# counterpart and deleting the line from ~/.config only lasts until the next
+# `chezmoi apply` - so edit the source and let apply propagate it. Uninstalls
+# nothing: prune runs as a dry-run, from $HOME so only the global config counts.
+misedrop() {
+  local pkg=$1
+  if [[ -z $pkg ]]; then
+    print -u2 "usage: misedrop <manager:package>   e.g. misedrop brew-cask:vlc"
+    return 2
+  fi
+  local dir="$(chezmoi source-path)/dot_config/mise" hits
+  hits=$(grep -rlF -- "\"$pkg\"" $dir)
+  if [[ -z $hits ]]; then
+    if grep -rqF -- "$pkg" $dir; then
+      print -u2 "misedrop: $pkg is not a host package key - tools go via: mise unuse -g $pkg"
+    else
+      print -u2 "misedrop: $pkg is not declared in $dir"
+    fi
+    return 1
+  fi
+  local f
+  for f in ${(f)hits}; do
+    grep -vF -- "\"$pkg\"" $f > $f.new
+    [[ -s $f.new ]] || { rm -f $f.new; print -u2 "misedrop: refusing to empty $f"; return 1 }
+    mv $f.new $f
+    print "removed $pkg from ${f:t}"
+  done
+  chezmoi apply && mise -C "$HOME" bootstrap packages prune --dry-run
+}
+
 # Aliases
 export EZA_ICONS_AUTO=1
 alias ls='eza'
