@@ -9,6 +9,9 @@ fi
 export PATH="$HOME/.local/bin:$PATH"
 export EDITOR=nano
 export SPARK_LOCAL_IP=127.0.0.1
+# let uv build venvs from the mise-provided interpreter instead of
+# downloading its own copy of the same version
+export UV_PYTHON_PREFERENCE=only-system
 
 # Completions (must be before compinit)
 fpath+=($HOMEBREW_PREFIX/share/zsh/site-functions(N))
