@@ -11,7 +11,6 @@ eza = "latest"
 fzf = "latest"
 ripgrep = "latest"
 starship = "latest"
-tmux = "latest"
 jq = "latest"
 yq = "latest"
 cloc = "latest"
@@ -20,15 +19,12 @@ rust = "latest"
 uv = "latest"
 java = "zulu-21"
 just = "latest"
-task = "latest"
 act = "latest"
 prek = "latest"
 github-cli = "latest"
 gitleaks = "latest"
 git-lfs = "latest"
 jj = "latest"
-xcodegen = "latest"
-"pipx:poethepoet" = "latest"
 
 # Cloud / data (unconditional, as in the Brewfile)
 azure = "latest"
@@ -61,14 +57,10 @@ adopt = true    # these apps are already installed by Homebrew - adopt, don't re
 "pacman:git" = { os = "linux" }
 "brew:hashcat" = { os = "macos" }
 "pacman:hashcat" = { os = "linux" }
-"brew:mosh" = { os = "macos" }
-"pacman:mosh" = { os = "linux" }
 "brew:tree" = { os = "macos" }
 "pacman:tree" = { os = "linux" }
 "brew:wget" = { os = "macos" }
 "pacman:wget" = { os = "linux" }
-"brew:telnet" = { os = "macos" }
-"pacman:inetutils" = { os = "linux" }    # Arch ships telnet here
 "brew:watch" = { os = "macos" }
 "pacman:procps-ng" = { os = "linux" }    # Arch ships watch here
 
@@ -86,7 +78,6 @@ adopt = true    # these apps are already installed by Homebrew - adopt, don't re
 # GUI applications (macOS only for now; Linux desktop is a separate decision)
 "brew-cask:appcleaner" = { os = "macos" }
 "brew-cask:cyberduck" = { os = "macos" }
-"brew-cask:dbeaver-community" = { os = "macos" }
 "brew-cask:firefox" = { os = "macos" }
 "brew-cask:ghostty" = { os = "macos" }
 "brew-cask:font-jetbrains-mono-nerd-font" = { os = "macos" }
@@ -97,6 +88,5 @@ adopt = true    # these apps are already installed by Homebrew - adopt, don't re
 "brew-cask:orbstack" = { os = "macos" }
 "brew-cask:slack" = { os = "macos" }
 "brew-cask:stats" = { os = "macos" }
-"brew-cask:taskpaper" = { os = "macos" }
 "brew-cask:zed" = { os = "macos" }
 "brew-cask:git-credential-manager" = { os = "macos" }
