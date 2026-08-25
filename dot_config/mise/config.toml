@@ -15,9 +15,6 @@ tmux = "latest"
 jq = "latest"
 yq = "latest"
 cloc = "latest"
-
-# Dev tooling
-bun = "latest"
 go = "latest"
 rust = "latest"
 uv = "latest"
