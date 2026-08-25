@@ -1,0 +1,13 @@
+{{- /* Generates ~/.config/chezmoi/chezmoi.toml on `chezmoi init`.
+       The *Once functions read the existing config first, so re-running
+       init to pick up a new variable never re-asks the answered ones. */ -}}
+{{- $machineType := promptStringOnce . "machine_type" "Machine type (personal/work)" "personal" -}}
+{{- $needsTerraform := promptBoolOnce . "needs_terraform" "Install Terraform tooling (terraform, tflint, checkov)" false -}}
+{{- $needsK8s := promptBoolOnce . "needs_k8s" "Install Kubernetes tooling (kubectl, helm, helmfile, k9s, kubelogin, tilt, freelens)" false -}}
+{{- $aws := promptBoolOnce . "aws" "Install the AWS CLI" false -}}
+
+[data]
+machine_type = {{ $machineType | trim | lower | quote }}
+needs_terraform = {{ $needsTerraform }}
+needs_k8s = {{ $needsK8s }}
+aws = {{ $aws }}
