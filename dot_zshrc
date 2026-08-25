@@ -11,7 +11,7 @@ export EDITOR=nano
 export SPARK_LOCAL_IP=127.0.0.1
 
 # Completions (must be before compinit)
-fpath+=($HOMEBREW_PREFIX/share/zsh/site-functions)
+fpath+=($HOMEBREW_PREFIX/share/zsh/site-functions(N))
 autoload -Uz compinit && compinit -C
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
@@ -21,9 +21,14 @@ eval "$(mise activate zsh)"
 # Starship prompt
 eval "$(starship init zsh)"
 
-# Plugins
-source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# Plugins - first match wins across brew, distro and nix prefixes
+zplug() {
+  local name=$1
+  local f=({/usr,/usr/local,/opt/homebrew,/home/linuxbrew/.linuxbrew,$HOME/.nix-profile}/share/{zsh/plugins/,}$name/$name.zsh(N))
+  (( $#f )) && source $f[1]
+}
+zplug zsh-autosuggestions
+zplug zsh-syntax-highlighting
 
 # FZF integration
 eval "$(fzf --zsh)"
