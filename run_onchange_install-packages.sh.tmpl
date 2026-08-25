@@ -10,8 +10,8 @@ if ! command -v mise &> /dev/null; then
 fi
 export PATH="$HOME/.local/bin:$PATH"
 
-echo "Installing host packages..."
-mise bootstrap packages apply --yes
-
-echo "Installing tools..."
-mise install --yes
+# From $HOME so only the global config counts - `chezmoi apply` run inside a
+# project would otherwise install that project's tools too. `--only` keeps this
+# to host packages and tools; the other bootstrap parts are not configured.
+cd "$HOME"
+mise bootstrap --only packages,tools --yes
