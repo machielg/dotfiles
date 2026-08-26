@@ -84,7 +84,6 @@ adopt = true    # these apps are already installed by Homebrew - adopt, don't re
 "brew-cask:jetbrains-toolbox" = { os = "macos" }
 "brew-cask:keka" = { os = "macos" }
 "brew-cask:logi-options+" = { os = "macos" }
-"brew-cask:microsoft-teams" = { os = "macos" }
 "brew-cask:orbstack" = { os = "macos" }
 "brew-cask:slack" = { os = "macos" }
 "brew-cask:stats" = { os = "macos" }
