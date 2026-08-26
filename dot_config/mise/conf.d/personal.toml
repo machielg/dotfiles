@@ -2,9 +2,8 @@
 
 [bootstrap.packages]
 "brew-cask:copilot-cli" = { os = "macos" }
-"brew-cask:google-chrome" = { os = "macos" }
 "brew-cask:grok-build" = { os = "macos" }
 "brew-cask:superduper" = { os = "macos" }
-"brew-cask:surfshark" = { os = "macos" }
 "brew-cask:tor-browser" = { os = "macos" }
 "brew-cask:vlc" = { os = "macos" }
+"brew-cask:utm" = "latest"
