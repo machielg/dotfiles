@@ -1,5 +1,8 @@
 # Personal machines only - see .chezmoiignore.
 
+[tools]
+rust = "latest"
+
 [bootstrap.packages]
 "brew-cask:grok-build" = { os = "macos" }
 "brew-cask:superduper" = { os = "macos" }
