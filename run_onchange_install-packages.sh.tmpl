@@ -2,6 +2,12 @@
 {{ range (glob (joinPath .chezmoi.sourceDir "dot_config/mise/**/*.toml")) -}}
 # mise config hash: {{ include . | sha256sum }}
 {{ end -}}
+# brewfile hash: {{ include "dot_config/homebrew/Brewfile" | sha256sum }}
+{{ if eq .machine_type "personal" -}}
+# brewfile hash: {{ include "dot_config/homebrew/personal.Brewfile" | sha256sum }}
+{{ else -}}
+# brewfile hash: {{ include "dot_config/homebrew/work.Brewfile" | sha256sum }}
+{{ end -}}
 set -euo pipefail
 
 if ! command -v mise &> /dev/null; then
@@ -9,6 +15,21 @@ if ! command -v mise &> /dev/null; then
     curl -fsSL https://mise.run | sh
 fi
 export PATH="$HOME/.local/bin:$PATH"
+
+{{ if eq .chezmoi.os "darwin" -}}
+if [[ -x /opt/homebrew/bin/brew ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [[ -x /usr/local/bin/brew ]]; then
+  eval "$(/usr/local/bin/brew shellenv)"
+fi
+echo "Installing Homebrew casks..."
+brew bundle --file="$HOME/.config/homebrew/Brewfile"
+{{ if eq .machine_type "personal" -}}
+brew bundle --file="$HOME/.config/homebrew/personal.Brewfile"
+{{ else -}}
+brew bundle --file="$HOME/.config/homebrew/work.Brewfile"
+{{ end -}}
+{{ end -}}
 
 # From $HOME so only the global config counts - `chezmoi apply` run inside a
 # project would otherwise install that project's tools too. `--only` keeps this
