@@ -25,7 +25,7 @@ gitleaks = "latest"
 git-lfs = "latest"
 jj = "latest"
 
-# Cloud / data (unconditional, as in the Brewfile)
+# Cloud / data
 azure = "latest"
 azd = "latest"
 databricks-cli = "latest"
@@ -39,13 +39,10 @@ apm = "latest"
 topgrade = "latest"
 "pipx:mcp-proxy" = "latest"
 
-# Host packages: system libraries, base tools and GUI apps. Not shimmed, not
+# Host packages: system libraries and base tools. Not shimmed, not
 # version-pinned per-project. Entries whose manager is unavailable on the
 # current host are ignored, so one list serves both macOS and Arch.
-# Apply with: mise bootstrap packages apply
-
-[bootstrap.brew]
-adopt = true    # these apps are already installed by Homebrew - adopt, don't replace
+# GUI apps live in ~/.config/homebrew/. Apply with: mise bootstrap packages apply
 
 [bootstrap.packages]
 
@@ -73,18 +70,3 @@ adopt = true    # these apps are already installed by Homebrew - adopt, don't re
 # bootstrap with get.chezmoi.io. Declared here so it stays updated afterwards.
 "brew:chezmoi" = { os = "macos" }
 "pacman:chezmoi" = { os = "linux" }
-
-# GUI applications (macOS only for now; Linux desktop is a separate decision)
-"brew-cask:appcleaner" = { os = "macos" }
-"brew-cask:cyberduck" = { os = "macos" }
-"brew-cask:firefox" = { os = "macos" }
-"brew-cask:ghostty" = { os = "macos" }
-"brew-cask:font-jetbrains-mono-nerd-font" = { os = "macos" }
-"brew-cask:jetbrains-toolbox" = { os = "macos" }
-"brew-cask:keka" = { os = "macos" }
-"brew-cask:logi-options+" = { os = "macos" }
-"brew-cask:orbstack" = { os = "macos" }
-"brew-cask:slack" = { os = "macos" }
-"brew-cask:stats" = { os = "macos" }
-"brew-cask:zed" = { os = "macos" }
-"brew-cask:git-credential-manager" = { os = "macos" }

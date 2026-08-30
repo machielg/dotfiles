@@ -52,7 +52,7 @@ get-forti-cert() {
 misedrop() {
   local pkg=$1
   if [[ -z $pkg ]]; then
-    print -u2 "usage: misedrop <manager:package>   e.g. misedrop brew-cask:vlc"
+    print -u2 "usage: misedrop <manager:package>   e.g. misedrop brew:tree"
     return 2
   fi
   local dir="$(chezmoi source-path)/dot_config/mise" hits

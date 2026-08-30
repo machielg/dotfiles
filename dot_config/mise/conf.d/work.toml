@@ -6,5 +6,3 @@ copier = "latest"
 [bootstrap.packages]
 "brew:openfortivpn" = { os = "macos" }
 "pacman:openfortivpn" = { os = "linux" }
-"brew-cask:copilot-cli" = { os = "macos" }
-"brew-cask:microsoft-teams" = { os = "macos" }

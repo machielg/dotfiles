@@ -2,10 +2,3 @@
 
 [tools]
 rust = "latest"
-
-[bootstrap.packages]
-"brew-cask:grok-build" = { os = "macos" }
-"brew-cask:superduper" = { os = "macos" }
-"brew-cask:tor-browser" = { os = "macos" }
-"brew-cask:vlc" = { os = "macos" }
-"brew-cask:utm" = "latest"
