@@ -2,3 +2,4 @@
 
 cask "copilot-cli"
 cask "microsoft-teams"
+cask "swiftbar"
