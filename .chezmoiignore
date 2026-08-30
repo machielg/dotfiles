@@ -1,6 +1,7 @@
-{{- /* mise merges every conf.d/*.toml into ~/.config/mise/config.toml, so the
-       machine-conditional entries are gated by whether their file gets applied
-       at all. Keeping the toml files plain is what lets `mise use -g` and
+{{- /* Machine-conditional files are gated by whether they get applied at all.
+       Keeping them plain is what lets `mise use -g`, Brewfile edits, and
        `chezmoi re-add` write to them. */ -}}
 {{ if ne .machine_type "personal" }}.config/mise/conf.d/personal.toml{{ end }}
 {{ if eq .machine_type "personal" }}.config/mise/conf.d/work.toml{{ end }}
+{{ if ne .machine_type "personal" }}.config/homebrew/personal.Brewfile{{ end }}
+{{ if eq .machine_type "personal" }}.config/homebrew/work.Brewfile{{ end }}

@@ -1,0 +1,16 @@
+# CLI tooling lives in ~/.config/mise/config.toml (cross-platform).
+# This file is macOS-only GUI apps. Plain so `chezmoi re-add` can pick up edits.
+
+cask "appcleaner"
+cask "cyberduck"
+cask "firefox"
+cask "ghostty"
+cask "font-jetbrains-mono-nerd-font"
+cask "jetbrains-toolbox"
+cask "keka"
+cask "logi-options+"
+cask "orbstack"
+cask "slack"
+cask "stats"
+cask "zed"
+cask "git-credential-manager"
