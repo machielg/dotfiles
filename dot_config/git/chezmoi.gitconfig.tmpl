@@ -8,8 +8,10 @@
 	email = 309370+machielg@users.noreply.github.com
 [init]
 	defaultBranch = main
-[credential]
-	helper = 
-	helper = {{ if eq .chezmoi.os "darwin" }}manager{{ else }}libsecret{{ end }}
 [credential "https://dev.azure.com"]
 	useHttpPath = true
+{{- if ne .chezmoi.os "darwin" }}
+[credential]
+	helper =
+	helper = libsecret
+{{- end }}

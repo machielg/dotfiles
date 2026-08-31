@@ -1,2 +1,3 @@
 Brewfile
 .config/mise/conf.d/k8s.toml
+.gitconfig
