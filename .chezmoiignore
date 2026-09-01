@@ -2,6 +2,7 @@
        Keeping them plain is what lets `mise use -g`, Brewfile edits, and
        `chezmoi re-add` write to them. */ -}}
 {{ if ne .machine_type "personal" }}.config/mise/conf.d/personal.toml{{ end }}
-{{ if eq .machine_type "personal" }}.config/mise/conf.d/htc.toml{{ end }}
+{{ if ne .machine_type "htc" }}.config/mise/conf.d/htc.toml{{ end }}
 {{ if ne .machine_type "personal" }}.config/homebrew/personal.Brewfile{{ end }}
-{{ if eq .machine_type "personal" }}.config/homebrew/htc.Brewfile{{ end }}
+{{ if ne .machine_type "htc" }}.config/homebrew/htc.Brewfile{{ end }}
+{{ if ne .machine_type "linkit" }}.config/homebrew/linkit.Brewfile{{ end }}

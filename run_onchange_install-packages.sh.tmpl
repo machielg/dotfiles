@@ -5,6 +5,8 @@
 # brewfile hash: {{ include "dot_config/homebrew/Brewfile" | sha256sum }}
 {{ if eq .machine_type "personal" -}}
 # brewfile hash: {{ include "dot_config/homebrew/personal.Brewfile" | sha256sum }}
+{{ else if eq .machine_type "linkit" -}}
+# brewfile hash: {{ include "dot_config/homebrew/linkit.Brewfile" | sha256sum }}
 {{ else -}}
 # brewfile hash: {{ include "dot_config/homebrew/htc.Brewfile" | sha256sum }}
 {{ end -}}
@@ -26,6 +28,8 @@ echo "Installing Homebrew casks..."
 brew bundle --file="$HOME/.config/homebrew/Brewfile"
 {{ if eq .machine_type "personal" -}}
 brew bundle --file="$HOME/.config/homebrew/personal.Brewfile"
+{{ else if eq .machine_type "linkit" -}}
+brew bundle --file="$HOME/.config/homebrew/linkit.Brewfile"
 {{ else -}}
 brew bundle --file="$HOME/.config/homebrew/htc.Brewfile"
 {{ end -}}
