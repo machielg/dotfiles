@@ -1,7 +1,7 @@
 {{- /* Generates ~/.config/chezmoi/chezmoi.toml on `chezmoi init`.
        The *Once functions read the existing config first, so re-running
        init to pick up a new variable never re-asks the answered ones. */ -}}
-{{- $machineType := promptStringOnce . "machine_type" "Machine type (personal/work)" "personal" -}}
+{{- $machineType := promptStringOnce . "machine_type" "Machine type (personal/htc)" "personal" -}}
 
 [data]
 machine_type = {{ $machineType | trim | lower | quote }}

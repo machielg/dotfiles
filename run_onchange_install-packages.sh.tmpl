@@ -6,7 +6,7 @@
 {{ if eq .machine_type "personal" -}}
 # brewfile hash: {{ include "dot_config/homebrew/personal.Brewfile" | sha256sum }}
 {{ else -}}
-# brewfile hash: {{ include "dot_config/homebrew/work.Brewfile" | sha256sum }}
+# brewfile hash: {{ include "dot_config/homebrew/htc.Brewfile" | sha256sum }}
 {{ end -}}
 set -euo pipefail
 
@@ -27,7 +27,7 @@ brew bundle --file="$HOME/.config/homebrew/Brewfile"
 {{ if eq .machine_type "personal" -}}
 brew bundle --file="$HOME/.config/homebrew/personal.Brewfile"
 {{ else -}}
-brew bundle --file="$HOME/.config/homebrew/work.Brewfile"
+brew bundle --file="$HOME/.config/homebrew/htc.Brewfile"
 {{ end -}}
 {{ end -}}
 
