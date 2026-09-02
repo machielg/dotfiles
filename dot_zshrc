@@ -75,6 +75,15 @@ misedrop() {
   chezmoi apply && mise -C "$HOME" bootstrap packages prune --dry-run
 }
 
+czc() {
+  chezmoi git add .
+  if git -C "$(chezmoi source-path)" diff --cached --quiet; then
+    print "chezmoi: nothing to commit"
+    return 0
+  fi
+  chezmoi git commit "$@"
+}
+
 # Aliases
 export EZA_ICONS_AUTO=1
 alias ls='eza'
@@ -82,7 +91,7 @@ alias ll='eza -la'
 alias tree='eza --tree'
 alias cat='bat'
 alias htc-vpn='sudo openfortivpn -q --trusted-cert "$(get-forti-cert vpn.humantotalcare.nl:443)" --set-dns=1 --pppd-use-peerdns=1'
-alias czpush='chezmoi re-add && chezmoi git add . && chezmoi git commit && chezmoi git push && exit'
+alias czpush='chezmoi re-add && czc && chezmoi git push && exit'
 
 # History
 HISTSIZE=10000
