@@ -3,8 +3,8 @@
 # mise config hash: {{ include . | sha256sum }}
 {{ end -}}
 # brewfile hash: {{ include "dot_config/homebrew/Brewfile" | sha256sum }}
-{{ if eq .machine_type "personal" -}}
-# brewfile hash: {{ include "dot_config/homebrew/personal.Brewfile" | sha256sum }}
+{{ if eq .machine_type "home" -}}
+# brewfile hash: {{ include "dot_config/homebrew/home.Brewfile" | sha256sum }}
 {{ else if eq .machine_type "linkit" -}}
 # brewfile hash: {{ include "dot_config/homebrew/linkit.Brewfile" | sha256sum }}
 {{ else -}}
@@ -26,8 +26,8 @@ elif [[ -x /usr/local/bin/brew ]]; then
 fi
 echo "Installing Homebrew casks..."
 brew bundle --file="$HOME/.config/homebrew/Brewfile"
-{{ if eq .machine_type "personal" -}}
-brew bundle --file="$HOME/.config/homebrew/personal.Brewfile"
+{{ if eq .machine_type "home" -}}
+brew bundle --file="$HOME/.config/homebrew/home.Brewfile"
 {{ else if eq .machine_type "linkit" -}}
 brew bundle --file="$HOME/.config/homebrew/linkit.Brewfile"
 {{ else -}}

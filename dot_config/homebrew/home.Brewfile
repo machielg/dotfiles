@@ -1,4 +1,4 @@
-# Personal machines only - see .chezmoiignore.
+# Home machines only - see .chezmoiignore.
 
 cask "grok-build"
 cask "superduper"

@@ -1,8 +1,8 @@
 {{- /* Machine-conditional files are gated by whether they get applied at all.
        Keeping them plain is what lets `mise use -g`, Brewfile edits, and
        `chezmoi re-add` write to them. */ -}}
-{{ if ne .machine_type "personal" }}.config/mise/conf.d/personal.toml{{ end }}
+{{ if ne .machine_type "home" }}.config/mise/conf.d/home.toml{{ end }}
 {{ if ne .machine_type "htc" }}.config/mise/conf.d/htc.toml{{ end }}
-{{ if ne .machine_type "personal" }}.config/homebrew/personal.Brewfile{{ end }}
+{{ if ne .machine_type "home" }}.config/homebrew/home.Brewfile{{ end }}
 {{ if ne .machine_type "htc" }}.config/homebrew/htc.Brewfile{{ end }}
 {{ if ne .machine_type "linkit" }}.config/homebrew/linkit.Brewfile{{ end }}
