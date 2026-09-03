@@ -2,4 +2,5 @@
 
 cask "copilot-cli"
 cask "microsoft-teams"
+cask "orbstack"
 cask "swiftbar"
