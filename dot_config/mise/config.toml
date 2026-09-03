@@ -37,6 +37,9 @@ opencode = "latest"
 apm = "latest"
 
 topgrade = "latest"
+# mise-managed python: the pipx backend (mcp-proxy) needs a configured python
+# or it falls back to the system python (3.9 on a clean mac), which is too old.
+python = "3.13"
 "pipx:mcp-proxy" = "latest"
 
 # Host packages: system libraries and base tools. Not shimmed, not
@@ -70,3 +73,6 @@ topgrade = "latest"
 # bootstrap with get.chezmoi.io. Declared here so it stays updated afterwards.
 "brew:chezmoi" = { os = "macos" }
 "pacman:chezmoi" = { os = "linux" }
+
+[bootstrap.macos.trackpad]
+tap_to_click = true
