@@ -37,10 +37,9 @@ opencode = "latest"
 apm = "latest"
 
 topgrade = "latest"
-# mise-managed python: the pipx backend (mcp-proxy) needs a configured python
-# or it falls back to the system python (3.9 on a clean mac), which is too old.
+# mise-managed python: venv-based backends (pipx:*) need a configured python
+# or they fall back to the system python (3.9 on a clean mac), which is too old.
 python = "3.13"
-"pipx:mcp-proxy" = "latest"
 
 # Host packages: system libraries and base tools. Not shimmed, not
 # version-pinned per-project. Entries whose manager is unavailable on the

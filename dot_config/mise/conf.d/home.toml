@@ -2,3 +2,4 @@
 
 [tools]
 rust = "latest"
+"pipx:mcp-proxy" = "latest"
