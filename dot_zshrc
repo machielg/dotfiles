@@ -22,6 +22,8 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 eval "$(mise activate zsh)"
 # mise ships no completion file; the generated script self-registers via compdef
 eval "$(mise completion zsh)"
+eval "$(carapace _carapace zsh)"
+eval "$(uv generate-shell-completion zsh)"
 
 # Starship prompt
 eval "$(starship init zsh)"
