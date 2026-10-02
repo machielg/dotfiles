@@ -23,7 +23,8 @@
 
 # Disable specific steps - same options as the command line flag
 # disable = ["system", "emacs"]
-disable = ["pip3", "ruby_gems", "gem", "containers"]
+# Go is project-scoped in mise; its shim exists without a global Go version.
+disable = ["pip3", "ruby_gems", "gem", "containers", "go"]
 
 # Ignore failures for these steps
 # ignore_failures = ["powershell"]

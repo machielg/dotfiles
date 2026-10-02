@@ -19,11 +19,15 @@ fi
 export PATH="$HOME/.local/bin:$PATH"
 
 {{ if eq .chezmoi.os "darwin" -}}
-if [[ -x /opt/homebrew/bin/brew ]]; then
-  eval "$(/opt/homebrew/bin/brew shellenv)"
-elif [[ -x /usr/local/bin/brew ]]; then
-  eval "$(/usr/local/bin/brew shellenv)"
-fi
+eval "$(/opt/homebrew/bin/brew shellenv)"
+{{ end -}}
+
+# From $HOME so only the global config counts - `chezmoi apply` run inside a
+# project would otherwise install that project's tools too.
+cd "$HOME"
+mise bootstrap --only packages,tools,macos-defaults --yes
+
+{{ if eq .chezmoi.os "darwin" -}}
 echo "Installing Homebrew casks..."
 brew bundle --file="$HOME/.config/homebrew/Brewfile"
 {{ if eq .machine_type "home" -}}
@@ -33,10 +37,10 @@ brew bundle --file="$HOME/.config/homebrew/linkit.Brewfile"
 {{ else -}}
 brew bundle --file="$HOME/.config/homebrew/htc.Brewfile"
 {{ end -}}
+# Homebrew 6 always quarantines casks; a reinstall then demands a new Allow.
+caskroom="$(brew --prefix)/Caskroom"
+if [[ -d $caskroom ]]; then
+  find "$caskroom" -name '*.app' -exec xattr -dr com.apple.quarantine {} + 2>/dev/null || true
+fi
+find /Applications -maxdepth 1 -name '*.app' -exec xattr -dr com.apple.quarantine {} + 2>/dev/null || true
 {{ end -}}
-
-# From $HOME so only the global config counts - `chezmoi apply` run inside a
-# project would otherwise install that project's tools too. `--only` keeps this
-# to host packages and tools; the other bootstrap parts are not configured.
-cd "$HOME"
-mise bootstrap --only packages,tools --yes

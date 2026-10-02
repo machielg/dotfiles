@@ -5,7 +5,13 @@
 	required = true
 [user]
 	name = Machiel Keizer-Groeneveld
+{{- if eq .machine_type "htc" }}
+	email = m.keizer-groeneveld@humantotalcare.nl
+{{- else if eq .machine_type "linkit" }}
+	email = machiel.keizer-groeneveld@linkit.nl
+{{- else }}
 	email = 309370+machielg@users.noreply.github.com
+{{- end }}
 [init]
 	defaultBranch = main
 [credential "https://dev.azure.com"]
