@@ -95,6 +95,11 @@ eval "$(fzf --zsh)"
 bindkey '^I' expand-or-complete  # Restore standard tab completion
 _prof "fzf"
 
+# Keep the Codex daemon from starting automatically in shell sessions.
+codex() {
+  command codex --disable daemon_auto_start "$@"
+}
+
 get-forti-cert() {
   echo | openssl s_client -connect "$1" 2>/dev/null \
     | openssl x509 -fingerprint -sha256 -noout \

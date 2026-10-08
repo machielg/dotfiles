@@ -6,3 +6,6 @@
 {{ if ne .machine_type "home" }}.config/homebrew/home.Brewfile{{ end }}
 {{ if ne .machine_type "htc" }}.config/homebrew/htc.Brewfile{{ end }}
 {{ if ne .machine_type "linkit" }}.config/homebrew/linkit.Brewfile{{ end }}
+
+# Codex stores machine-local trusted paths here.
+.codex/config.toml
