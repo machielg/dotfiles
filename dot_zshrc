@@ -1,8 +1,35 @@
 # ~/.zshrc - Optimized
 
-if [[ -x /opt/homebrew/bin/brew ]]; then
-  eval "$(/opt/homebrew/bin/brew shellenv)"
+# Startup profiling: no-op unless ZSHRC_PROFILE is set, so normal shells pay
+# nothing. Run `ZSHRC_PROFILE=1 zsh` to see a per-section timing breakdown.
+if [[ -n $ZSHRC_PROFILE ]]; then
+  zmodload zsh/datetime
+  typeset -F _prof_last=$EPOCHREALTIME
+  _prof() {
+    local now=$EPOCHREALTIME
+    printf '%8.1fms  %s\n' $(( (now - _prof_last) * 1000 )) "$1" >&2
+    _prof_last=$now
+  }
+else
+  _prof() { :; }
 fi
+
+# Homebrew - shellenv output is static per install location, so cache it
+# and only regenerate when the brew binary itself changes (upgrade/reinstall).
+# `-nt` is a plain file-mtime test, no subprocess, so this check is ~free.
+if [[ -x /opt/homebrew/bin/brew ]]; then
+  _brew_bin=/opt/homebrew/bin/brew
+elif [[ -x /usr/local/bin/brew ]]; then
+  _brew_bin=/usr/local/bin/brew
+fi
+if [[ -n $_brew_bin ]]; then
+  _brew_env_cache=$HOME/.cache/zsh/brew-shellenv.zsh
+  [[ -d ${_brew_env_cache:h} ]] || mkdir -p ${_brew_env_cache:h}
+  [[ ! -e $_brew_env_cache || $_brew_bin -nt $_brew_env_cache ]] && $_brew_bin shellenv > $_brew_env_cache
+  source $_brew_env_cache
+fi
+unset _brew_bin _brew_env_cache
+_prof "brew shellenv"
 
 export PATH="$HOME/.local/bin:$PATH"
 export EDITOR=nano
@@ -12,32 +39,61 @@ export SPARK_LOCAL_IP=127.0.0.1
 export UV_PYTHON_PREFERENCE=only-system
 
 # Completions (must be before compinit)
-fpath+=($HOMEBREW_PREFIX/share/zsh/site-functions(N))
+fpath+=($HOMEBREW_PREFIX/share/zsh/site-functions(N) $HOME/.cache/zsh/completions(N))
 autoload -Uz compinit && compinit -C
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+_prof "compinit"
 
 # mise - must come before anything that runs a mise-managed binary
 eval "$(mise activate zsh)"
+_prof "mise activate"
 # mise ships no completion file; the generated script self-registers via compdef
 eval "$(mise completion zsh)"
+_prof "mise completion"
 eval "$(carapace _carapace zsh)"
-eval "$(uv generate-shell-completion zsh)"
+_prof "carapace"
+# uv completion - eval'ing ~7000 lines fresh every shell is most of this
+# block's cost (zsh parsing it immediately, not the subprocess). Freeze it
+# to a file on fpath instead so it's autoloaded lazily on first Tab, and
+# only regenerate when the uv binary itself changes.
+_uv_bin=$(command -v uv)
+if [[ -n $_uv_bin ]]; then
+  _uv_completion_dir=$HOME/.cache/zsh/completions
+  _uv_completion=$_uv_completion_dir/_uv
+  [[ -d $_uv_completion_dir ]] || mkdir -p $_uv_completion_dir
+  if [[ ! -e $_uv_completion || $_uv_bin -nt $_uv_completion ]]; then
+    uv generate-shell-completion zsh > $_uv_completion
+    # compinit -C blindly trusts the existing dump and won't notice a new/
+    # changed fpath file on its own; drop the dump once so the next shell
+    # rebuilds it, then subsequent shells go back to the cheap -C path.
+    rm -f ~/.zcompdump
+  fi
+fi
+unset _uv_bin _uv_completion_dir _uv_completion
+_prof "uv completion"
 
 # Starship prompt
 eval "$(starship init zsh)"
+_prof "starship init"
 
-# Plugins - first match wins across brew, distro and nix prefixes
+# Plugins - Apple Silicon Homebrew only; HOMEBREW_PREFIX is set above by
+# `brew shellenv`. The old version globbed 10 candidate paths (Intel brew,
+# linuxbrew, nix, generic /usr) per plugin to stay portable across machines
+# this box will never be, which cost ~110ms/shell doing stats on paths that
+# don't exist here.
 zplug() {
   local name=$1
-  local f=({/usr,/usr/local,/opt/homebrew,/home/linuxbrew/.linuxbrew,$HOME/.nix-profile}/share/{zsh/plugins/,}$name/$name.zsh(N))
+  local f=($HOMEBREW_PREFIX/share/$name/$name.zsh(N))
   (( $#f )) && source $f[1]
 }
 zplug zsh-autosuggestions
 zplug zsh-syntax-highlighting
+_prof "plugins"
 
 # FZF integration
 eval "$(fzf --zsh)"
 bindkey '^I' expand-or-complete  # Restore standard tab completion
+_prof "fzf"
 
 get-forti-cert() {
   echo | openssl s_client -connect "$1" 2>/dev/null \
@@ -101,3 +157,7 @@ setopt SHARE_HISTORY HIST_IGNORE_DUPS
 export PAGER=cat
 export GIT_PAGER=cat
 export SYSTEMD_PAGER=cat
+
+_prof "aliases, functions, history"
+unset -f _prof
+unset _prof_last
