@@ -39,6 +39,7 @@ topgrade = "latest"
 # mise-managed python: venv-based backends (pipx:*) need a configured python
 # or they fall back to the system python (3.9 on a clean mac), which is too old.
 python = "3.13"
+node = "latest"
 
 # Host packages: system libraries and base tools. Not shimmed, not
 # version-pinned per-project. Entries whose manager is unavailable on the
